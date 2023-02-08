@@ -21,7 +21,7 @@ export const transformRawChannelData = (
         contact: "Test contact", // to do
         note: "Test note", // to do
         totalScreensCount: user.reduce(
-          (acc, val) => acc + val.RegistredPlayers.length,
+          (acc: any, val: any) => acc + val.RegistredPlayers.length,
           0
         ),
         onlineScreensCount: 0,
