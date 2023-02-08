@@ -1,0 +1,93 @@
+@mixin placeholder {
+  ::-webkit-input-placeholder {
+    color: $disabled !important;
+  }
+  :-moz-placeholder {
+    color: $disabled !important;
+  }
+  ::-moz-placeholder {
+    color: $disabled !important;
+  }
+  :-ms-input-placeholder {
+    color: $disabled !important;
+  }
+}
+
+@mixin cover-viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--100vh);
+}
+
+@mixin centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin height-no-header {
+  height: calc(var(--100vh) - 4.5rem);
+
+  @media only screen and (max-width: 75em) {
+    height: calc(var(--100vh) - 8rem);
+  }
+
+  @media only screen and (max-width: 48em) {
+    height: calc(var(--100vh) - 11.5rem);
+  }
+}
+
+@mixin height-table {
+  height: calc(var(--100vh) - 7.5rem);
+
+  @media only screen and (max-width: 75em) {
+    height: calc(var(--100vh) - 11.5rem);
+  }
+  @media only screen and (max-width: 48em) {
+    height: calc(var(--100vh) - 13.25rem);
+  }
+}
+
+@mixin hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin more {
+  position: absolute;
+  width: 14rem;
+  top: 0;
+  right: 0;
+  padding: 0.75rem 1.5rem;
+  background-color: $white;
+  z-index: 10;
+  box-shadow: 0px 0px 7px rgba(46, 72, 88, 0.5);
+  border-radius: 0.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: $font-size-regular;
+  color: $darkBlue;
+
+  & > div {
+    padding: 0.75rem 0;
+    cursor: pointer;
+
+    &:hover {
+      color: $lightBlue;
+    }
+  }
+}
+
+@mixin more-backdrop {
+  display: block;
+  z-index: 5;
+  background-color: rgba($darkBlue, 0.5);
+  @include cover-viewport;
+}

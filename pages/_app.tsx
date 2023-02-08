@@ -1,17 +1,33 @@
-import type { AppProps } from 'next/app'
-import type { LayoutProps } from '@vercel/examples-ui/layout'
-import { getLayout } from '@vercel/examples-ui'
-import '@vercel/examples-ui/globals.css'
+import type { AppProps } from "next/app";
+import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+import { ControlPanelProvider } from "../context/CPData";
+
+import "../scss/All.scss";
+
+const queryClient = new QueryClient();
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const Layout = getLayout<LayoutProps>(Component)
+  useEffect(() => {
+    function handleResize() {
+      document.documentElement.style.setProperty(
+        "--100vh",
+        `${window.innerHeight - 1}px`
+      );
+    }
 
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
-    <Layout
-      title="Password Protected"
-      path="edge-middleware/basic-auth-password"
-    >
-      <Component {...pageProps} />
-    </Layout>
-  )
+    <QueryClientProvider client={queryClient}>
+      <ControlPanelProvider>
+        <Component {...pageProps} />
+      </ControlPanelProvider>
+    </QueryClientProvider>
+  );
 }

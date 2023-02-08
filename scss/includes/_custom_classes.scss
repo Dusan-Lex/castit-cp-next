@@ -1,0 +1,427 @@
+$theme-colors: (
+  "dark-blue": $darkBlue,
+  "light-blue": $lightBlue,
+  "hover-blue": $hoverBlue,
+
+  "gray": $gray,
+  "light-gray": $lightGray,
+  "white": $white,
+  "disabled": $disabled,
+
+  "dark-red": $darkRed,
+  "light-red": $lightRed,
+
+  "dark-green": $darkGreen,
+  "light-green": $lightGreen,
+);
+
+$font-sizes: (
+  "x-small": $font-size-x-small,
+  "small": $font-size-small,
+  "regular": $font-size-regular,
+  "medium": $font-size-medium,
+  "large": $font-size-large,
+  "x-large": $font-size-x-large,
+  "xx-large": $font-size-xx-large,
+);
+
+@import "bootstrap/scss/bootstrap";
+
+//svgs
+
+.logo {
+  width: 4.65rem;
+}
+
+.screen,
+.channel {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.expand,
+.stats,
+.online,
+.offline,
+.not-started,
+.edit,
+.delete,
+.restart,
+.connect,
+.preview,
+.close,
+.collapse-all {
+  width: 1rem;
+  height: 1rem;
+}
+
+.header-more {
+  width: 2rem;
+  height: 2rem;
+}
+
+.search,
+.statistics,
+.row-more {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.cancel {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.chevron {
+  width: 1rem;
+  transform: rotate(-90deg);
+  transition: transform 0.15s ease-out;
+
+  &.expand {
+    transform: rotate(0);
+  }
+}
+
+.sort {
+  width: 0.75rem;
+}
+
+.sort.desc {
+  transform: rotate(180deg);
+}
+
+// header
+
+.header {
+  &__button {
+    min-height: 2.5rem;
+    width: 8.4375rem;
+    background-color: $white;
+
+    @include centering;
+
+    &:hover {
+      background-color: $hoverBlue;
+    }
+  }
+
+  &__switch {
+    width: 12.25rem;
+    border-right: 1px solid $white;
+
+    @media only screen and (max-width: 36em) {
+      border-right: none;
+    }
+
+    button {
+      background-color: $white;
+
+      &.active {
+        background-color: $hoverBlue;
+      }
+    }
+  }
+
+  &__search {
+    border-right: 1px solid $white;
+
+    @media only screen and (max-width: 48em) {
+      border-right: none;
+    }
+
+    input {
+      min-height: 2.5rem;
+    }
+
+    @include placeholder;
+  }
+
+  &__more {
+    @include more;
+  }
+
+  &__backdrop {
+    @include more-backdrop;
+  }
+}
+
+// sidebar
+
+.sidebar {
+  &__backdrop {
+    display: none;
+    z-index: 5;
+    background-color: $white;
+    -webkit-transition: background-color 0.2s ease-in-out;
+    -moz-transition: background-color 0.2s ease-in-out;
+    -o-transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
+    @include cover-viewport;
+  }
+
+  &__content {
+    background-color: #fafafa;
+    width: 26rem;
+    position: absolute;
+    top: calc(100% + 1rem);
+    right: calc(-100% - 3.8rem);
+    box-shadow: 0px 4px 5px rgba(46, 72, 88, 0.3);
+    border-radius: 0.625rem 0 0 0.625rem;
+    z-index: 10;
+    -webkit-transition: right 0.2s ease-in-out;
+    -moz-transition: right 0.2s ease-in-out;
+    -o-transition: right 0.2s ease-in-out;
+    transition: right 0.2s ease-in-out;
+    overflow-y: auto;
+
+    @include height-no-header;
+
+    @media only screen and (max-width: 36em) {
+      width: 100vw;
+      right: calc(-100vw - 1.3rem);
+      border-radius: 0;
+    }
+  }
+
+  &.open &__backdrop {
+    background-color: rgba($darkBlue, 0.5);
+    display: block;
+  }
+
+  &.open &__content {
+    right: -1rem;
+  }
+}
+
+// users table
+
+.users-table {
+  width: 100%;
+  min-width: 1100px;
+
+  .tbody {
+    height: calc(100% - 3rem) !important;
+    overflow-y: scroll !important;
+
+    @media (any-pointer: fine) {
+      width: calc(100% + 16px);
+    }
+  }
+
+  .tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+
+    .td,
+    .th {
+      display: table-cell;
+      vertical-align: middle;
+
+      &:first-child,
+      &:last-child {
+        width: 2rem;
+      }
+
+      &:nth-child(2) {
+        width: 21%;
+      }
+
+      &:nth-child(3) {
+        width: 13%;
+      }
+
+      &:nth-child(4) {
+        width: 10%;
+      }
+
+      &:nth-child(5) {
+        width: 14%;
+      }
+
+      &:nth-child(6),
+      &:nth-child(7) {
+        width: 12%;
+      }
+
+      &:last-child {
+        padding-right: 2rem;
+      }
+    }
+
+    &--thead {
+      background-color: $darkBlue;
+      color: $white;
+
+      .th {
+        padding: 1rem;
+        white-space: nowrap;
+        text-transform: uppercase;
+
+        & > svg {
+          margin-bottom: 0.12rem;
+        }
+      }
+    }
+
+    &--tbody {
+      cursor: pointer;
+      background-color: $white;
+      border-bottom: 0.03125rem solid $gray;
+
+      &:hover {
+        background-color: $hoverBlue;
+      }
+
+      .td {
+        padding: 1rem;
+        line-height: 1rem;
+
+        &:nth-child(8) {
+          font-weight: $font-weight-medium;
+          font-style: italic;
+        }
+      }
+    }
+  }
+
+  .tbody-tr {
+    cursor: pointer;
+    background-color: $white;
+    border-bottom: 0.03125rem solid $gray;
+
+    &:hover {
+      background-color: $hoverBlue;
+    }
+
+    .tbody-td {
+      padding: 1rem;
+      line-height: 1rem;
+
+      &:nth-child(8) {
+        font-weight: $font-weight-medium;
+        font-style: italic;
+      }
+    }
+  }
+
+  .thead-tr {
+    background-color: $darkBlue;
+    color: $white;
+    .th {
+      padding: 1rem;
+      white-space: nowrap;
+      text-transform: uppercase;
+
+      & > svg {
+        margin-bottom: 0.12rem;
+      }
+    }
+  }
+
+  &__more {
+    @include more;
+  }
+
+  &__backdrop {
+    @include more-backdrop;
+  }
+
+  @include height-table;
+}
+
+.expand-row {
+  animation: expand 0.15s ease-in-out;
+}
+
+@keyframes expand {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// screens table
+
+.screens-table {
+  width: 100%;
+
+  tr {
+    font-size: $font-size-small;
+    line-height: 1rem;
+
+    td,
+    th {
+      padding: 1rem;
+
+      &:nth-child(2) {
+        width: 15%;
+      }
+
+      &:nth-child(4) {
+        width: 14%;
+      }
+
+      &:nth-child(8) {
+        width: 2rem;
+      }
+    }
+  }
+
+  thead {
+    background-color: $white;
+    color: $darkBlue;
+    border-bottom: 0.03125rem solid $gray;
+
+    tr {
+      th {
+        white-space: nowrap;
+        text-transform: uppercase;
+
+        svg {
+          margin-bottom: 0.12rem;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      background-color: $white;
+      border-bottom: 0.03125rem solid $gray;
+
+      &.online {
+        background-color: $lightGreen;
+      }
+
+      &.offline {
+        background-color: $lightRed;
+      }
+
+      &.not-started {
+        color: $disabled;
+      }
+    }
+  }
+
+  &__more {
+    @include more;
+  }
+
+  &__backdrop {
+    @include more-backdrop;
+  }
+}
+
+.loading,
+.no-results {
+  transform: translateY(-1.5rem);
+  @include height-no-header;
+  @include centering;
+}
+
+.height-no-header {
+  @include height-no-header;
+}
