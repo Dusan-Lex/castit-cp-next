@@ -37,7 +37,7 @@ const UsersTable = memo(() => {
     [filteredUsers]
   );
 
-  const columns: Column<IUsersTableData>[] = useMemo(
+  const columns = useMemo(
     () => [
       {
         Header: () => null,

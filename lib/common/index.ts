@@ -11,7 +11,7 @@ export const transformRawChannelData = (
   rawChannelData: IRowChannelData
 ): IUser[] =>
   Object.values(groupBy(Object.values(rawChannelData), "MainObjectID"))
-    .map((user) => {
+    .map((user: any) => {
       return {
         id: user[0].MainObjectID,
         username: user[0].MainObject.trim(),
@@ -128,10 +128,7 @@ export const mergeLiveData = (
   };
 };
 
-export const sortUsernames = (
-  prev: Row<IUsersTableData>,
-  curr: Row<IUsersTableData>
-) => {
+export const sortUsernames = (prev: any, curr: any) => {
   if (
     prev.original.username?.toLowerCase() >
     curr.original.username?.toLowerCase()
@@ -147,10 +144,7 @@ export const sortUsernames = (
   return 0;
 };
 
-export const sortScreens = (
-  prev: Row<IUsersTableData>,
-  curr: Row<IUsersTableData>
-) => {
+export const sortScreens = (prev: any, curr: any) => {
   if (prev.original.onlineScreensCount > curr.original.onlineScreensCount) {
     return -1;
   }

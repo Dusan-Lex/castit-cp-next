@@ -39,7 +39,7 @@ const ScreensTable: React.FC<{ screens: IScreen[] }> = memo(({ screens }) => {
     [screens]
   );
 
-  const columns: Column<IScreensTableData>[] = useMemo(
+  const columns = useMemo(
     () => [
       {
         Header: "Status",
